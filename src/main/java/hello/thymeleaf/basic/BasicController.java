@@ -25,11 +25,13 @@ public class BasicController {
         model.addAttribute("data", "<>Hello Spring!");
         return "basic/text-basic";
     }
+
     @GetMapping("/text-unescaped") //이부분 맥에서는 안적음
     public String textUnescaped(Model model) {
         model.addAttribute("data", "Hello <b>Spring!</b>");
         return "basic/text-unescaped";
     }
+
     @GetMapping("/variable")
     public String variable(Model model) {
         User userA = new User("userA", 10);
@@ -40,7 +42,7 @@ public class BasicController {
         list.add(userB);
 
         Map<String, User> map = new HashMap<>();
-        map.put("userA",userA);
+        map.put("userA", userA);
         map.put("userB", userB);
 
         model.addAttribute("user", userA);
@@ -62,7 +64,7 @@ public class BasicController {
     }
 
     @Component("helloBean")
-    static class HelloBean{
+    static class HelloBean {
         public String hello(String data) {
             return "Hello" + data;
         }
@@ -77,7 +79,7 @@ public class BasicController {
     @GetMapping("/link")
     public String link(Model model) {
         model.addAttribute("param1", "data1");
-        model.addAttribute("param2","data2");
+        model.addAttribute("param2", "data2");
         return "basic/link";
     }
 
@@ -157,5 +159,11 @@ public class BasicController {
         list.add(new User("userB", 20));
         list.add(new User("userC", 30));
         System.out.println(list.get(1));
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "index"; //스프링부트는 기본적으로 templates 에서 파일찾음
+        // static 파일경로 주면 그래서 에러나는거임
     }
 }
